@@ -1,6 +1,6 @@
 ﻿namespace PglLinkPs
 {
-    partial class Form1
+    partial class Main
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,12 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.PS = new System.Windows.Forms.TextBox();
+            this.SuspendLayout();
+            // 
+            // PS
+            // 
+            this.PS.Location = new System.Drawing.Point(12, 31);
+            this.PS.Multiline = true;
+            this.PS.Name = "PS";
+            this.PS.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.PS.Size = new System.Drawing.Size(357, 716);
+            this.PS.TabIndex = 0;
+            // 
+            // Main
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1063, 765);
+            this.Controls.Add(this.PS);
+            this.Name = "Main";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox PS;
     }
 }
 
