@@ -26,7 +26,7 @@ namespace PglLinkPs
             }
             else
             {
-                name += string.Format("(+%s -%s)", aa[up], aa[down]);
+                name += string.Format("(+{0} -{1})", aa[up], aa[down]);
             }
             this.name = name;
             this.up = up;

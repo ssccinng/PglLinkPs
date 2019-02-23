@@ -20,6 +20,32 @@ namespace PokemonSearch
         {
             fill(all);
         }
+        public String getHiddenPowerType()
+        {
+            string rtn = "";
+            int type = Value[0] % 2 + (Value[1] % 2) * 2 + (Value[2] % 2) * 4 + (Value[5] % 2) * 8 + (Value[3] % 2) * 16 + (Value[4] % 2) * 32;
+            type = (type * 15) / 63;
+            switch (type)
+            {
+                case 0: rtn = "Fighting"; break;
+                case 1: rtn = "Flying"; break;
+                case 2: rtn = "Poison"; break;
+                case 3: rtn = "Ground"; break;
+                case 4: rtn = "Rock"; break;
+                case 5: rtn = "Bug"; break;
+                case 6: rtn = "Ghost"; break;
+                case 7: rtn = "Steel"; break;
+                case 8: rtn = "Fire"; break;
+                case 9: rtn = "Water"; break;
+                case 10: rtn = "Grass"; break;
+                case 11: rtn = "Electric"; break;
+                case 12: rtn = "Psychic"; break;
+                case 13: rtn = "Ice"; break;
+                case 14: rtn = "Dragon"; break;
+                case 15: rtn = "Dark"; break;
+            }
+            return rtn;
+        }
         // public Racial(Racial f)
         // {
         //     SetValue(f.Value[0],f.Value[1],f.Value[2],f.Value[3],f.Value[4], f.Value[5]);

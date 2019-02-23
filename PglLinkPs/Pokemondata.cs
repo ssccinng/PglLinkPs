@@ -14,6 +14,7 @@ namespace PglLinkPs
         static int a = 1;
 
         private static string[] Type = { null, "火", "水", "草", "电", "一般", "格斗", "飞行", "虫", "毒", "岩石", "地面", "钢", "冰", "超能力", "恶", "幽灵", "龙", "妖精" };
+        private static string[] EngType = { null, "Fire", "Water", "Grass", "Electric", "Normal", "Fighting", "Flying", "Bug", "Poison", "Rock", "Ground", "Steel", "Ice", "Psychic", "Dark", "Ghost", "Dragon", "Fairy" };
         public static string[] Ability = database.Ability.Split(',');
         public static string[] EnglishName = database.EnglishName.Split(',');
 
@@ -24,6 +25,7 @@ namespace PglLinkPs
         public static string[] ItemName = database.ItemName.Split(',');
         public static string[] ItemEngName = database.ItemEngName.Split(',');
         private static Hashtable TypeId = DeHashtable(Type);
+        private static Hashtable EngTypeId = DeHashtable(EngType);
         public static Hashtable EngAbilityID = DeHashtable(AbilityEngName);
         private static Hashtable EngMoveID = DeHashtable(MoveEngName);
         private static Hashtable EngItemID = DeHashtable(ItemEngName);
@@ -239,6 +241,36 @@ namespace PglLinkPs
             return TypeId;
         }
 
+        public static string GetEngTypeName(int TypeId)
+        {
+            return EngType[TypeId];
+        }
+
+        public static string[] GetEngTypeName(int[] TypeId)
+        {
+            string[] EngTypename = new string[TypeId.Length];
+            for (int i = 0; i < TypeId.Length; ++i)
+            {
+                EngTypename[i] = GetEngTypeName(TypeId[i]);
+            }
+            return EngTypename;
+        }
+
+        public static int GetEngTypeId(string Typename)
+        {
+            return (int)EngTypeId[Typename];
+        }
+
+        public static int[] GetEngTypeId(string[] Typename)
+        {
+            int[] EngTypeId = new int[Typename.Length];
+            for (int i = 0; i < Typename.Length; ++i)
+            {
+                EngTypeId[i] = GetEngTypeId(Typename[i]);
+            }
+            return EngTypeId;
+        }
+
         public static int GetAbilityId(string name)
         {
             if (AbilityId.Contains(name))
@@ -307,11 +339,11 @@ namespace PglLinkPs
             return 0;
         }
 
-        public static Pokemon GetpPokemonUSE(string name)
+        public static PokemonInfo GetpPokemonUSE(string name)
         {
             if (pokemonListId.Contains(name))
             {
-                Pokemon b = new Pokemon(GetPokemonBase(name));
+                PokemonInfo b = new PokemonInfo(GetPokemonBase(name));
                 b.Pokemonextend();
                 return b;
             }

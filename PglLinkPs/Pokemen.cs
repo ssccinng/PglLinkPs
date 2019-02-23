@@ -8,7 +8,7 @@ using System.Text;
 namespace PokemonSearch
 {
     // mega对mega 形态归形态
-    public class Pokemon : PokemonBase
+    public class PokemonInfo : PokemonBase
     {
 
         // private String name;
@@ -29,7 +29,7 @@ namespace PokemonSearch
         public Racial EVS;
         public Racial IVS;
         public NatureClass Nature;
-        public Pokemon(PokemonBase f) : base(f.name, f.PokemonID, f.NameList, f.TypeId, f.AbilityList, f.FormId, f.RacialValue)
+        public PokemonInfo(PokemonBase f) : base(f.name, f.PokemonID, f.NameList, f.TypeId, f.AbilityList, f.FormId, f.RacialValue)
         {
         }
 
@@ -44,7 +44,32 @@ namespace PokemonSearch
             this.Nature = Pokemondata.getNatureClass(0);
             this.Level = 50;
         }
-
+        public String getHiddenPowerType()
+        {
+            string rtn = "";
+            int type = IVS.Value[0] % 2 + (IVS.Value[1] % 2) * 2 + (IVS.Value[2] % 2) * 4 + (IVS.Value[5] % 2) * 8 + (IVS.Value[3] % 2) * 16 + (IVS.Value[4] % 2) * 32;
+            type = (type * 15) / 63;
+            switch (type)
+            {
+                case 0: rtn = "Fighting"; break;
+                case 1: rtn = "Flying"; break;
+                case 2: rtn = "Poison"; break;
+                case 3: rtn = "Ground"; break;
+                case 4: rtn = "Rock"; break;
+                case 5: rtn = "Bug"; break;
+                case 6: rtn = "Ghost"; break;
+                case 7: rtn = "Steel"; break;
+                case 8: rtn = "Fire"; break;
+                case 9: rtn = "Water"; break;
+                case 10: rtn = "Grass"; break;
+                case 11: rtn = "Electric"; break;
+                case 12: rtn = "Psychic"; break;
+                case 13: rtn = "Ice"; break;
+                case 14: rtn = "Dragon"; break;
+                case 15: rtn = "Dark"; break;
+            }
+            return rtn;
+        }
         // public Pokemon(Pokemon f) {
         //     super(f.name, f.PokemonID, f.NameList, f.TypeId, f.AbilityList, f.FormId, f.RacialValue);
         //     Pokemonextend(f.movelist, f.Item, f.Ability, f.Shiny, f.EVS, f.IVS, f.Level, f.Nature);
@@ -62,7 +87,7 @@ namespace PokemonSearch
             this.EVS = (EVS);
             this.IVS = (IVS);
             this.Level = Level;
-            this.Nature = (Nature);
+            this.Nature = (Nature == null ? Pokemondata.getNatureClass(0) : Nature);
             // this.Nature = new NatureClass(Nature);
         }
         // public Pokemon(/*String Name, String Item, String Ability,
