@@ -32,7 +32,7 @@ namespace PglLinkPs
             if (textBox1.Text.ToUpper() == "ICEFAIRY" || textBox2.Text == "2057695956")
             {
                 label3.Location = new System.Drawing.Point(label3.Location.X - 60, label3.Location.Y);
-                label3.Text = "moobot全力为菲力聚聚生成中...稍等0.0";
+                label3.Text = "moobot全力为冰仙聚聚生成中...稍等0.0";
             }
             else
             {
@@ -48,6 +48,8 @@ namespace PglLinkPs
             wb = excel.Workbooks.Open(System.Windows.Forms.Application.StartupPath + "\\报名表模板.xlsx");
             Excel.Worksheet ws = (Excel.Worksheet)wb.Worksheets[1];
             ws.Name = textBox1.Text + "报名表";
+            ws.Cells[3, 4].Value2 = matchtitle;
+            ws.Cells[29, 4].Value2 = tag;
             ws.Cells[4, 5].Value2 = textBox1.Text;
             ws.Cells[4, 7].Value2 = textBox2.Text;
             //ws.Cells[5, 5].Value2 = "点333";
@@ -90,10 +92,26 @@ namespace PglLinkPs
             this.Close();
             excel.Quit();
         }
+        public static string readToString(string fileName)
+        {
+            FileStream fs = new FileStream(System.Windows.Forms.Application.StartupPath + "\\" + fileName, FileMode.OpenOrCreate);
+            StreamReader sr = new StreamReader(fs);
+
+            string re = sr.ReadToEnd();
+            sr.Close();
+            fs.Close();
+            fs.Dispose();
+            return re;
+        }
+
+        string matchtitle = "";
+        string tag = "";
 
         private void userQQ_Load(object sender, EventArgs e)
         {
-            
+            //string[] qq = readToString("load.txt").Split('\n');
+            //matchtitle = qq[0].Trim();
+            //tag = qq[1].Trim();
         }
     }
 }

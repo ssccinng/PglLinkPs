@@ -19,7 +19,7 @@ namespace submit
             Racial IVsfin = new Racial();
             IVsfin.fill();
             int Level = 50;
-            
+            int Happiness = 160;
             if (NameandItem.Length > 1)
             {
                 Item = Pokemondata.GetItemName(Pokemondata.EnglishNametoItemID(NameandItem[1]));
@@ -45,8 +45,12 @@ namespace submit
                 }
             }
             int qq = 9;
-            PokemonInfo PB = new PokemonInfo(Pokemondata.GetPokemonBase(Pokemondata.EnglishNametopokeID(Name)));
-
+            //Name = Name.Replace("-Gmax", "");
+            PokemonInfo PB = new PokemonInfo(Pokemondata.GetPokemonBase(Pokemondata.EnglishNametopokeID(Name.Replace("-Gmax", ""))));
+            if (Name.Contains("-Gmax"))
+            {
+                PB.Gmax = true;
+            }
             for (int i = 1; i < data.Length; ++i)
             {
                 string[] temp = Regex.Split(data[i].Trim(), @"\s*:\s*");
@@ -88,6 +92,9 @@ namespace submit
                             SHINY = true;
                         }
 
+                        break;
+                    case "Happiness":
+                        Happiness = int.Parse(temp[1]);
                         break;
                     default:
                         string[] gg = data[i].Split(' ');
@@ -198,7 +205,12 @@ namespace submit
 
         public static string PokemontoPS_once(PokemonInfo poke)
         {
+
             string team = Pokemondata.EnglishName[(int)(Pokemondata.PokemonnameID[poke.name])];
+            if (poke.Gmax)
+            {
+                team += "-Gmax";
+            }
             if (poke.Item != "")
             {
                 team += " @ " + Pokemondata.ItemEngName[Pokemondata.GetItemId(poke.Item)];
@@ -209,6 +221,10 @@ namespace submit
                 team += "Ability: " + Pokemondata.AbilityEngName[Pokemondata.GetAbilityId(poke.Ability)] + "\r\n";
             }
             team += "Level: 50\r\n";
+            if (poke.Happiness != 160)
+            {
+                team += "Happiness: " + poke.Happiness + "\r\n";
+            }
             string aa = "";
             string[] orz = { "HP", "Atk", "Def", "SpA", "SpD", "Spe" };
             for (int i = 0; i < 6; ++i)
@@ -270,6 +286,10 @@ namespace submit
         public static string PokemontochiPS_once(PokemonInfo poke)
         {
             string team = poke.name;
+            if (poke.Gmax)
+            {
+                team += "-超极巨";
+            }
             if (poke.Item != "")
             {
                 team += " @ " + poke.Item;
@@ -280,6 +300,11 @@ namespace submit
                 team += "特性: " + poke.Ability + "\r\n";
             }
             team += "等级: 50\r\n";
+            if (poke.Happiness != 160)
+            {
+                team += "亲密度: " + poke.Happiness + "\r\n";
+            }
+
             string aa = "";
             string[] orz = { "HP", "物攻", "物防", "特攻", "特防", "速度" };
             for (int i = 0; i < 6; ++i)

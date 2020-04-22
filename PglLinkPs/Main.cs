@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace PglLinkPs
 {
     public partial class Main : Form
@@ -17,9 +18,10 @@ namespace PglLinkPs
         {
             InitializeComponent();
         }
+        
         //private void anyTextBox_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
         //{
-            
+
         //}
         public class PokemonInfo
         {
@@ -58,7 +60,7 @@ namespace PglLinkPs
                 
                 Name.SelectedIndexChanged += Name_SelectedIndexChanged;
                 Name.TextChanged += Name_TextChanged;
-                Name.SelectedItem = "冰伊布";
+                Name.SelectedItem = "烈咬陆鲨";
                 tran.Click += Tran_Click;
                 
             }
@@ -91,19 +93,20 @@ namespace PglLinkPs
 
             private void Name_TextChanged(object sender, EventArgs e)
             {
-                if (this.poke.name == "冰伊布")
-                {
-                    if (((ComboBox)sender).Text == "Icefairy")
-                    {
-                        pokemonhead.Image = (Image)pokeimg.ResourceManager.GetObject("Icefairy");
-                    }
-                    else if (((ComboBox)sender).Text == "艾斯菲力")
-                    {
-                        pokemonhead.Image = (Image)pokeimg.ResourceManager.GetObject("Icefairy");
-                    }
-                }
-                
-                else if (Name.Items.Contains(((ComboBox)sender).Text))
+                //if (this.poke.name == "冰伊布")
+                //{
+                //    if (((ComboBox)sender).Text == "Icefairy")
+                //    {
+                //        pokemonhead.Image = (Image)pokeimg.ResourceManager.GetObject("Icefairy");
+                //    }
+                //    else if (((ComboBox)sender).Text == "艾斯菲力")
+                //    {
+                //        pokemonhead.Image = (Image)pokeimg.ResourceManager.GetObject("Icefairy");
+                //    }
+                //}
+
+                //else 
+                if (Name.Items.Contains(((ComboBox)sender).Text))
                 {
                     Name.SelectedItem = ((ComboBox)sender).Text;
                 }
@@ -115,7 +118,7 @@ namespace PglLinkPs
                 if (((ComboBox)sender).SelectedItem.ToString() != poke.name)
                 {
                     SetPokemon(((ComboBox)sender).SelectedItem.ToString());
-                    pokemonhead.Image = (Image)pokeimg.ResourceManager.GetObject(((ComboBox)sender).SelectedItem.ToString().Replace("-", "T"));
+                    pokemonhead.Image = (Image)pokeimg.ResourceManager.GetObject(((ComboBox)sender).SelectedItem.ToString().Replace("-", "T").Replace("（", "T").Replace("）", "").Replace("：", "T").Replace("・", "T").Replace("%", ""));
                 }
                 
             }
@@ -124,7 +127,7 @@ namespace PglLinkPs
             {
                 if (poname == null)
                 {
-                    this.poke = Pokemondata.GetpPokemonUSE("冰伊布");
+                    this.poke = Pokemondata.GetpPokemonUSE("烈咬陆鲨");
                 }
                 else if (poname != this.poke.name)
                 {
@@ -207,8 +210,8 @@ namespace PglLinkPs
         {
             if (poke == null)
             {
-                qq[i,j].Name.SelectedItem = "冰伊布";
-                qq[i,j].poke = Pokemondata.GetpPokemonUSE("冰伊布");
+                qq[i,j].Name.SelectedItem = "烈咬陆鲨";
+                qq[i,j].poke = Pokemondata.GetpPokemonUSE("烈咬陆鲨");
                 for (int index1 = 0; index1 < 4; ++index1)
                 {
                     qq[i,j].Move[index1++].Text = "";

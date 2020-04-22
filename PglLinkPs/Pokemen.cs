@@ -22,9 +22,10 @@ namespace PokemonSearch
 
         public string Item;
         public string Ability;
-
+        public bool Gmax = false;
         public string[] move = new string[4];
         public int Level;
+        public int Happiness;
         public bool Shiny;
         public Racial EVS;
         public Racial IVS;
